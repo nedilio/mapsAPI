@@ -26,6 +26,7 @@
     </div>
   </div>
 
+  
     <script>
         var home = {lat: -33.4470996, lng: -70.600959}; 
         var work = {lat:-33.4291909, lng: -70.599858};
@@ -50,7 +51,8 @@
             
             var coords = results.features[i].geometry.coordinates;
             var name = results.features[i].properties.name;
-            names[i]=name;
+            var imagen = results.features[i].properties.foto;
+            // names[i]=name;
 
             
             var latLng = new google.maps.LatLng(coords[1],coords[0]);
@@ -59,14 +61,16 @@
               map: map,
               title: 'Click to zoom '+name,
               name: name,
+              imagen: imagen,
             });
             var infowindow = new google.maps.InfoWindow();
             google.maps.event.addListener(marker, 'click', (function(marker) {
                        return function() {
-                         console.log(name);
-                         console.log(marker);
+                        //  console.log(name);
+                         console.log(marker.imagen);
                          
-                           var content = marker.name;
+                           var content = '<div class="content" style="width:50px;height:50px;"><img src="'+marker.imagen+'" width="50" height="50" alt="" class="img-fluid rounded-circle"></div>';
+                          //  var content = marker.imagen;
                            infowindow.setContent(content);
                            infowindow.open(map, marker);
                            map.setZoom(18);

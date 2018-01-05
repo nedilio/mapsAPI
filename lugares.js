@@ -14,7 +14,8 @@ eqfeed_callback (
       },
       "properties": {
           "name":"Mariale",
-          "Direccion":"Manuel Antonio Matta 52"
+          "Direccion":"Manuel Antonio Matta 52",
+          "foto":"./images/mariale.jpg",
       }
     },
     {
@@ -28,7 +29,9 @@ eqfeed_callback (
       },
       "properties": {
           "name":"Nelson",
-          "Direccion":"Suecia 2955"
+          "Direccion":"Suecia 2955",
+          "foto":"./images/nelson.png",
+          
       }
     },
     {
@@ -42,7 +45,8 @@ eqfeed_callback (
       },
       "properties": {
           "name":"Pedro y Mafe",
-          "Direccion":"Irarrazaval 5000"
+          "Direccion":"Irarrazaval 5000",
+          "foto":"./images/pedro.png",
       }
     },
     {
@@ -56,7 +60,8 @@ eqfeed_callback (
       },
       "properties": {
           "name":"Seguridad y Simón",
-          "Direccion":"Plaza Ñuñoa"
+          "Direccion":"Plaza Ñuñoa",
+          "foto":"./images/seguridad.png",
       }
     }
   ]
