@@ -16,55 +16,53 @@
     <script>
         var home = {lat: -33.4470996, lng: -70.600959}; 
         var work = {lat:-33.4291909, lng: -70.599858};
-        var map, infoWindow;
+        var map;
+        var infowindow = [];
+        var names = [];
+        
         function initMap() {
           map = new google.maps.Map(document.getElementById('map'), {
             center: home,
             zoom: 12
           });
-          infoWindow = new google.maps.InfoWindow;
-                  // Create a <script> tag and set the USGS URL as the source.
         var script = document.createElement('script');
-        // This example uses a local copy of the GeoJSON stored at
-        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+
         script.src = './lugares.js';
         document.getElementsByTagName('head')[0].appendChild(script);
   
-      //   window.eqfeed_callback = function(results) {
-      //     console.log(results);
- 
-      //     var infowindow = new google.maps.InfoWindow({
-      //       content: name
-      //     });
-
-
-      //   }
-      // }
-
-
-
         }
         window.eqfeed_callback = function(results) {
 
-    
+          for (var i = 0; i < results.features.length; i++) {
+            
+            var coords = results.features[i].geometry.coordinates;
+            var name = results.features[i].properties.name;
+            names[i]=name;
 
-       for (var i = 0; i < results.features.length; i++) {
+            
+            var latLng = new google.maps.LatLng(coords[1],coords[0]);
+            var marker = new google.maps.Marker({
+              position: latLng,
+              map: map,
+              title: 'Click to zoom '+name,
+              name: name,
+            });
+            var infowindow = new google.maps.InfoWindow();
+            google.maps.event.addListener(marker, 'click', (function(marker) {
+                       return function() {
+                         console.log(name);
+                         console.log(marker);
+                         
+                           var content = marker.name;
+                           infowindow.setContent(content);
+                           infowindow.open(map, marker);
+                           map.setZoom(18);
+                           map.setCenter(marker.getPosition());
+                       }
+                     })(marker));
+          }
           
-          var coords = results.features[i].geometry.coordinates;
-          var name = results.features[i].properties.name;
-          
-          var latLng = new google.maps.LatLng(coords[1],coords[0]);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            map: map,
-            title: 'Click to zoom '+name,
-          });
-          var infowindow = new google.maps.InfoWindow({
-            content: name
-          });
-
-        
-        }}
+        }
 
         function myLoc() {
           // Try HTML5 geolocation.
