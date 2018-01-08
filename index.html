@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="482728418706-9am3ujmq0nsf06ldqclo4003nronctgb.apps.googleusercontent.com">
     <title>Maps API</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <script
-  src="https://code.jquery.com/jquery-2.2.4.js"
-  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-  crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="container">
@@ -26,6 +25,7 @@
     <div class="row" style="margin-top:30px;">
       <div class="col text-center">
         <button onclick="myLoc()" class="btn btn-primary">Localizar</button>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
       </div>
     </div>
   </div>
@@ -102,8 +102,7 @@
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
               };
-              // map.setCenter(pos);
-              // map.setZoom(15);
+
 
               var marker = new google.maps.Marker({
                 position: pos,
@@ -141,7 +140,7 @@
 									if (status == 'OK') {
 										directionsDisplay.setDirections(response);
 									} else {
-										//window.alert('Directions request failed due to ' + status);
+										window.alert('Directions request failed due to ' + status);
 									}
 								});
         }
