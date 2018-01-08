@@ -11,6 +11,30 @@
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 </head>
 <body>
+  
+<script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '140381573326706',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.11'
+      });
+        
+      FB.AppEvents.logPageView();   
+        
+    };
+  
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+
   <div class="container">
     <div class="row">
       <div class="col text-center">
@@ -26,6 +50,7 @@
       <div class="col text-center">
         <button onclick="myLoc()" class="btn btn-primary">Localizar</button>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
       </div>
     </div>
     <div class="row">
@@ -195,12 +220,18 @@
           console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
           $('#nombre').html('<h1>'+profile.getName()+'</h1>');
           $('#foto').html('<img src="'+profile.getImageUrl()+'" alt="" class="img-fluid">');
-          $('#email').html('<p>'+profile.getEmail()+'</p>');
+          $('#mail').html('<p>'+profile.getEmail()+'</p>');
         }
         function signOut() {
           var auth2 = gapi.auth2.getAuthInstance();
           auth2.signOut().then(function () {
             console.log('User signed out.');
+          });
+        }
+        
+        function checkLoginState() {
+          FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
           });
         }
  
