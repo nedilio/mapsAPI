@@ -193,7 +193,9 @@
           console.log('Name: ' + profile.getName());
           console.log('Image URL: ' + profile.getImageUrl());
           console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-          $('#name').html('<h1>'+profile.getName()+'</h1>')
+          $('#nombre').html('<h1>'+profile.getName()+'</h1>');
+          $('#foto').html('<img src="'+profile.getImageUrl()+'" alt="" class="img-fluid">');
+          $('#email').html('<p>'+profile.getEmail()+'</p>');
         }
         function signOut() {
           var auth2 = gapi.auth2.getAuthInstance();
@@ -203,6 +205,7 @@
         }
  
     </script>
+    
 
 
 
