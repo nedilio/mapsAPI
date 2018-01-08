@@ -50,14 +50,14 @@
       <div class="col text-center">
         <button onclick="myLoc()" class="btn btn-primary">Localizar</button>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+        <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button> -->
       </div>
     </div>
     <div class="row">
       <div id="nombre" class="col-sm-4"></div>
       <div id="foto" class="col-sm-4"></div>
       <div id="mail" class="col-sm-4"></div>
-      <a href="#" onclick="signOut();">Sign out</a>
+      <a class="logOut" style="display:none;" href="#" onclick="signOut();">Sign out</a>
     </div>
   </div>
 
@@ -221,11 +221,19 @@
           $('#nombre').html('<h1>'+profile.getName()+'</h1>');
           $('#foto').html('<img src="'+profile.getImageUrl()+'" alt="" class="img-fluid">');
           $('#mail').html('<p>'+profile.getEmail()+'</p>');
+          $('.g-signin2').hide();
+          $('.logOut').show();          
         }
         function signOut() {
           var auth2 = gapi.auth2.getAuthInstance();
           auth2.signOut().then(function () {
             console.log('User signed out.');
+            $('#nombre').html('');
+          $('#foto').html('');
+          $('#mail').html('');
+          $('.g-signin2').show();
+          $('.logOut').hide();
+          
           });
         }
         
