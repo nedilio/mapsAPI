@@ -211,6 +211,12 @@
           infoWindow.open(map);
         }
 
+        var ctaLayer = new google.maps.KmlLayer({
+          url: './ruta.kml',
+          map: map
+        });
+
+
 
         function onSignIn(googleUser) {
           var profile = googleUser.getBasicProfile();
